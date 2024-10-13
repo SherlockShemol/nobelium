@@ -110,7 +110,6 @@ export default function Header ({ navBarTitle, fullWidth }) {
               height={24}
               alt={BLOG.title}
               onError={() => setFavicon(true)}
-              className="w-6 h-6"
             />
           </Link>
           <HeaderName
@@ -131,13 +130,13 @@ const HeaderName = forwardRef(function HeaderName ({ siteTitle, siteDescription,
   return (
     <p
       ref={ref}
-      className="header-name ml-2 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events grid-rows-1 grid-cols-1 items-center flex"
+      className="header-name ml-2 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events grid-rows-1 grid-cols-1 items-center flex flex-col justify-center"
       onClick={onClick}
     >
-      {postTitle && <span className="post-title row-start-1 col-start-1">{postTitle}</span>}
-      <span className="row-start-1 col-start-1">
+      {postTitle && <span className="post-title text-sm">{postTitle}</span>}
+      <span className="flex items-center">
         <span className="site-title">{siteTitle}</span>
-        <span className="site-description font-normal">, {siteDescription}</span>
+        <span className="site-description font-normal text-sm">, {siteDescription}</span>
       </span>
     </p>
   )
