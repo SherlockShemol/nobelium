@@ -19,7 +19,7 @@ class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            href="/fonts/GeistMono-Black.woff2"
+            href="/fonts/GeistMono-Bold.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
