@@ -3,10 +3,11 @@
 @tailwind utilities;
 @font-face {
   font-family: 'Geist Mono';
-  font-weight: 100 900;
-  font-display: swap;
   font-style: normal;
-  src: url('https://assets.vercel.com/raw/upload/v1681358963/fonts/geist/GeistMonoVF.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/GeistMono-Black.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2190-21FF;
 }
 
 @font-face {
@@ -116,7 +117,6 @@ nav {
     grid-row: 1;
   }
   .header-name .post-title {
-    @apply truncate;
     align-self: start;
   }
   .header-name > span {
@@ -125,7 +125,8 @@ nav {
     min-width: 0;
     grid-row: 1;
   }
-  .header-name .site-title {
+  .sticky-nav-full .header-name .post-title,
+  .sticky-nav-full .header-name .site-title {
     @apply truncate;
   }
   .site-title,

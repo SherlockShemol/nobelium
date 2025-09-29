@@ -19,20 +19,18 @@ class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            href="https://assets.vercel.com/raw/upload/v1681358963/fonts/geist/GeistMonoVF.woff2"
+            href="/fonts/GeistMono-Black.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
-          {config.font === 'serif' && (
-            <link
-              rel="preload"
-              href="/fonts/SourceHanSerifSC-VF.otf.woff2"
-              as="font"
-              type="font/woff2"
-              crossOrigin="anonymous"
-            />
-          )}
+          <link
+            rel="preload"
+            href="/fonts/SourceHanSerifSC-VF.otf.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
           <link rel="icon" href="/favicon.png" />
           <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/feed"></link>
           {config.appearance === 'auto'
