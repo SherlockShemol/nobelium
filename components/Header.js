@@ -102,8 +102,8 @@ export default function Header ({ navBarTitle, fullWidth }) {
             className="fill-black dark:fill-white"
           />
         </svg>
-        <div className="flex items-center min-w-0">
-          <Link href="/" aria-label={BLOG.title} className="flex-shrink-0">
+        <div className="flex items-baseline min-w-0 gap-2">
+          <Link href="/" aria-label={BLOG.title} className="flex-shrink-0 self-center">
             <Image
               src={favicon}
               width={24}
@@ -134,9 +134,9 @@ const HeaderName = forwardRef(function HeaderName ({ siteTitle, siteDescription,
       onClick={onClick}
     >
       {postTitle && <span className="post-title text-sm">{postTitle}</span>}
-      <span className="flex items-center min-w-0 flex-wrap gap-1">
-        <span className="site-title whitespace-nowrap">{siteTitle}</span>
-        <span className="site-description font-normal text-sm">, {siteDescription}</span>
+      <span className="flex items-baseline min-w-0 flex-wrap gap-1 leading-tight">
+        <span className="site-title whitespace-nowrap leading-tight">{siteTitle}</span>
+        <span className="site-description font-normal text-sm leading-snug basis-full md:basis-auto">, {siteDescription}</span>
       </span>
     </p>
   )
