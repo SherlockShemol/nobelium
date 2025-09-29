@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/fonts/GeistMono-Bold.woff2",
+      "source": "/fonts/GeistMono-Light.woff2",
       "headers": [
         {
           "key": "Cache-Control",
