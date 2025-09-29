@@ -133,10 +133,10 @@ const HeaderName = forwardRef(function HeaderName ({ siteTitle, siteDescription,
       className="header-name ml-2 min-w-0 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events"
       onClick={onClick}
     >
-      {postTitle && <span className="post-title text-sm">{postTitle}</span>}
-      <span className="flex flex-wrap items-center min-w-0 gap-x-1 leading-tight">
+      {postTitle && <span className="header-name__post post-title text-sm leading-tight">{postTitle}</span>}
+      <span className="header-name__primary flex flex-wrap items-center min-w-0 gap-x-1 leading-tight">
         <span className="site-title whitespace-nowrap leading-tight">{siteTitle}</span>
-        <span className="site-description font-normal text-sm leading-snug basis-full sm:basis-auto text-gray-600 dark:text-gray-300">, {siteDescription}</span>
+        <span className="site-description header-name__subtitle font-normal text-sm leading-snug w-full sm:w-auto text-gray-600 dark:text-gray-300">, {siteDescription}</span>
       </span>
     </p>
   )
