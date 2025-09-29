@@ -2,39 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-  font-family: 'IBM Plex Sans';
+  font-family: 'Geist Mono';
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
-  font-named-instance: 'Regular';
-  src: url('/fonts/IBMPlexSansVar-Roman.woff2') format('woff2');
+  src: url('https://assets.vercel.com/raw/upload/v1681358963/fonts/geist/GeistMonoVF.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'IBM Plex Sans';
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: italic;
-  font-named-instance: 'Italic';
-  src: url('/fonts/IBMPlexSansVar-Italic.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Source Serif';
-  font-weight: 100 900;
+  font-family: 'Source Han Serif SC';
+  font-weight: 200 900;
   font-display: swap;
   font-style: normal;
-  font-named-instance: 'Regular';
-  src: url('/fonts/SourceSerif.var.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Source Serif';
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: italic;
-  font-named-instance: 'Italic';
-  src: url('/fonts/SourceSerif-Italic.var.woff2') format('woff2');
+  src: url('/fonts/SourceHanSerifSC-VF.otf.woff2') format('woff2');
 }
 
 html {
@@ -126,15 +106,25 @@ nav {
     @apply max-w-full border-b border-opacity-50 border-gray-200 dark:border-gray-600 dark:border-opacity-50;
   }
   .header-name {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
     min-width: 0;
+  }
+  .header-name > * {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .header-name .post-title {
+    @apply truncate;
+    align-self: start;
   }
   .header-name > span {
+    display: flex;
+    align-items: center;
     min-width: 0;
+    grid-row: 1;
   }
-  .header-name .post-title,
   .header-name .site-title {
     @apply truncate;
   }
