@@ -102,8 +102,8 @@ export default function Header ({ navBarTitle, fullWidth }) {
             className="fill-black dark:fill-white"
           />
         </svg>
-        <div className="flex items-center">
-          <Link href="/" aria-label={BLOG.title}>
+        <div className="flex items-center flex-1 min-w-0 gap-2">
+          <Link href="/" aria-label={BLOG.title} className="flex-shrink-0">
             <Image
               src={favicon}
               width={24}
@@ -130,13 +130,13 @@ const HeaderName = forwardRef(function HeaderName ({ siteTitle, siteDescription,
   return (
     <p
       ref={ref}
-      className="header-name ml-2 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events grid-rows-1 grid-cols-1 items-center flex flex-col justify-center"
+      className="header-name ml-2 flex-1 min-w-0 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events items-center flex flex-col justify-center"
       onClick={onClick}
     >
-      {postTitle && <span className="post-title text-sm">{postTitle}</span>}
-      <span className="flex items-center">
-        <span className="site-title">{siteTitle}</span>
-        <span className="site-description font-normal text-sm">, {siteDescription}</span>
+      {postTitle && <span className="post-title text-sm truncate">{postTitle}</span>}
+      <span className="flex items-center min-w-0">
+        <span className="site-title truncate">{siteTitle}</span>
+        <span className="site-description font-normal text-sm flex-shrink-0">, {siteDescription}</span>
       </span>
     </p>
   )

@@ -126,7 +126,17 @@ nav {
     @apply max-w-full border-b border-opacity-50 border-gray-200 dark:border-gray-600 dark:border-opacity-50;
   }
   .header-name {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+  .header-name > span {
+    min-width: 0;
+  }
+  .header-name .post-title,
+  .header-name .site-title {
+    @apply truncate;
   }
   .site-title,
   .post-title {
