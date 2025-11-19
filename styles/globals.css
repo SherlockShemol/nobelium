@@ -113,6 +113,9 @@ nav {
     gap: 0.25rem;
     min-width: 0;
   }
+  .sticky-nav-full .header-name {
+    gap: 0;
+  }
   .header-name__primary {
     display: flex;
     flex-wrap: wrap;
@@ -127,6 +130,10 @@ nav {
   .site-title,
   .header-name__post {
     @apply transition duration-500;
+  }
+  .site-title {
+    max-height: 3rem;
+    overflow: hidden;
   }
   .header-name__subtitle {
     @apply inline-flex;
@@ -154,6 +161,7 @@ nav {
   }
   .sticky-nav-full .header-name__post ~ .header-name__primary .site-title {
     @apply opacity-0;
+    max-height: 0;
   }
 }
 
