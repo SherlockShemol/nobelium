@@ -64,6 +64,8 @@
 }
 .notion-page-link {
   color: inherit;
+  display: flex;
+  align-items: center;
 }
 
 svg.notion-page-icon {
