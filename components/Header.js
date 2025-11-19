@@ -86,43 +86,41 @@ export default function Header ({ navBarTitle, fullWidth }) {
     <>
       <div className="observer-element h-4 md:h-12" ref={sentinelRef}></div>
       <div
-        className="sticky-nav group m-auto w-full h-6 mb-2 md:mb-12 py-8 bg-opacity-60"
+        className={`sticky-nav group m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 ${
+          !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
+        }`}
         id="sticky-nav"
         ref={navRef}
         onClick={handleClickHeader}
       >
-        <div className={`flex flex-row justify-between items-center h-full w-full m-auto relative ${
-          !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
-        }`}>
-          <svg
-            viewBox="0 0 24 24"
-            className="caret w-6 h-6 absolute inset-x-0 bottom-0 mx-auto pointer-events-none opacity-30 group-hover:opacity-100 transition duration-100"
-          >
-            <path
-              d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z"
-              className="fill-black dark:fill-white"
+        <svg
+          viewBox="0 0 24 24"
+          className="caret w-6 h-6 absolute inset-x-0 bottom-0 mx-auto pointer-events-none opacity-30 group-hover:opacity-100 transition duration-100"
+        >
+          <path
+            d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z"
+            className="fill-black dark:fill-white"
+          />
+        </svg>
+        <div className="flex items-center min-w-0 gap-1.5">
+          <Link href="/" aria-label={BLOG.title} className="flex-shrink-0">
+            <Image
+              src={favicon}
+              width={24}
+              height={24}
+              alt={BLOG.title}
+              onError={() => setFavicon(true)}
             />
-          </svg>
-          <div className="flex items-center min-w-0 gap-1.5">
-            <Link href="/" aria-label={BLOG.title} className="flex-shrink-0">
-              <Image
-                src={favicon}
-                width={24}
-                height={24}
-                alt={BLOG.title}
-                onError={() => setFavicon(true)}
-              />
-            </Link>
-            <HeaderName
-              ref={titleRef}
-              siteTitle={BLOG.title}
-              siteDescription={BLOG.description}
-              postTitle={navBarTitle}
-              onClick={handleClickHeader}
-            />
-          </div>
-          <NavBar />
+          </Link>
+          <HeaderName
+            ref={titleRef}
+            siteTitle={BLOG.title}
+            siteDescription={BLOG.description}
+            postTitle={navBarTitle}
+            onClick={handleClickHeader}
+          />
         </div>
+        <NavBar />
       </div>
     </>
   )
