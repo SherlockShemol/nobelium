@@ -4,20 +4,21 @@ import Image from 'next/image'
 import { useConfig } from '@/lib/config'
 import { useLocale } from '@/lib/locale'
 import useTheme from '@/lib/theme'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 const NavBar = () => {
   const BLOG = useConfig()
-  const locale = useLocale()
+  const { locale } = useLocale()
   const links = [
     { id: 0, name: locale.NAV.INDEX, to: BLOG.path || '/', show: true },
     { id: 1, name: locale.NAV.ABOUT, to: '/about', show: BLOG.showAbout },
     { id: 2, name: locale.NAV.FRIENDS, to: '/friends', show: true },
     { id: 3, name: locale.NAV.RSS, to: '/feed', show: true, external: true },
     { id: 4, name: locale.NAV.SEARCH, to: '/search', show: true },
-    { id: 5, name: 'Resume', to: '/resume.html', show: false, external: true }
+    { id: 5, name: locale.NAV.RESUME, to: '/resume', show: true }
   ]
   return (
-    <div className="flex-shrink-0">
+    <div className="flex-shrink-0 flex items-center">
       <ul className="flex flex-row">
         {links.map(
           link =>
@@ -31,6 +32,7 @@ const NavBar = () => {
             )
         )}
       </ul>
+      <LanguageSwitcher />
     </div>
   )
 }

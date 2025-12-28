@@ -2,7 +2,7 @@ import { useLocale } from '@/lib/locale'
 import Container from '@/components/Container'
 
 export default function Page404 () {
-  const locale = useLocale()
+  const { locale } = useLocale()
 
   return (
     <Container>

@@ -4,7 +4,7 @@ import { useLocale } from '@/lib/locale'
 
 const Pagination = ({ page, showNext }) => {
   const BLOG = useConfig()
-  const locale = useLocale()
+  const { locale } = useLocale()
   const currentPage = +page
   let additionalClassName = 'justify-between'
   if (currentPage === 1 && showNext) additionalClassName = 'justify-end'
