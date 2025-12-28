@@ -4,8 +4,20 @@ import Container from '@/components/Container'
 import BlogPost from '@/components/BlogPost'
 import Pagination from '@/components/Pagination'
 import { getAllPosts } from '@/lib/notion'
+import { useConfig } from '@/lib/config'
+import { useFilteredPosts } from '@/lib/useFilteredPosts'
 
-const Page = ({ postsToShow, page, showNext }) => {
+const Page = ({ posts, page }) => {
+  const { postsPerPage } = useConfig()
+  const filteredPosts = useFilteredPosts(posts)
+  
+  const postsToShow = filteredPosts.slice(
+    postsPerPage * (page - 1),
+    postsPerPage * page
+  )
+  const totalPosts = filteredPosts.length
+  const showNext = page * postsPerPage < totalPosts
+
   return (
     <Container>
       {postsToShow &&
@@ -18,17 +30,10 @@ const Page = ({ postsToShow, page, showNext }) => {
 export async function getStaticProps (context) {
   const { page } = context.params // Get Current Page No.
   const posts = await getAllPosts({ includePages: false })
-  const postsToShow = posts.slice(
-    config.postsPerPage * (page - 1),
-    config.postsPerPage * page
-  )
-  const totalPosts = posts.length
-  const showNext = page * config.postsPerPage < totalPosts
   return {
     props: {
-      page, // Current Page
-      postsToShow,
-      showNext
+      page: parseInt(page), // Current Page
+      posts
     },
     revalidate: 1
   }

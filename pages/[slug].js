@@ -1,6 +1,7 @@
 import { clientConfig } from '@/lib/server/config'
 
 import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import cn from 'classnames'
 import { getAllPosts, getPostBlocks } from '@/lib/notion'
 import { useLocale } from '@/lib/locale'
@@ -10,13 +11,40 @@ import Container from '@/components/Container'
 import Post from '@/components/Post'
 import Comments from '@/components/Comments'
 
-export default function BlogPost ({ post, blockMap, emailHash }) {
+/**
+ * Select the appropriate post based on current language
+ * @param {Array} posts - All posts with the same slug (different language versions)
+ * @param {string} lang - Current language
+ * @returns {Object} - The post matching the current language, or the first available
+ */
+function useLocalizedPost(posts, lang) {
+  return useMemo(() => {
+    if (!posts || posts.length === 0) return null
+    if (posts.length === 1) return posts[0]
+    
+    // Find post matching current language
+    const localizedPost = posts.find(post => {
+      const postLangs = post.lang
+      if (!postLangs || postLangs.length === 0) return false
+      return postLangs.includes(lang)
+    })
+    
+    // Return localized post or fallback to first post
+    return localizedPost || posts[0]
+  }, [posts, lang])
+}
+
+export default function BlogPost ({ posts, blockMaps, emailHash }) {
   const router = useRouter()
   const BLOG = useConfig()
-  const { locale } = useLocale()
+  const { locale, lang } = useLocale()
+  
+  // Select the appropriate post based on current language
+  const post = useLocalizedPost(posts, lang)
+  const blockMap = post ? blockMaps[post.id] : null
 
   // TODO: It would be better to render something
-  if (router.isFallback) return null
+  if (router.isFallback || !post) return null
 
   const fullWidth = post.fullWidth ?? false
 
@@ -72,19 +100,27 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
 
 export async function getStaticPaths () {
   const posts = await getAllPosts({ includePages: true })
+  // Get unique slugs (there might be multiple posts with same slug for different languages)
+  const uniqueSlugs = [...new Set(posts.map(row => row.slug))]
   return {
-    paths: posts.map(row => `${clientConfig.path}/${row.slug}`),
+    paths: uniqueSlugs.map(slug => `${clientConfig.path}/${slug}`),
     fallback: true
   }
 }
 
 export async function getStaticProps ({ params: { slug } }) {
-  const posts = await getAllPosts({ includePages: true })
-  const post = posts.find(t => t.slug === slug)
+  const allPosts = await getAllPosts({ includePages: true })
+  // Get all posts with this slug (could be multiple language versions)
+  const posts = allPosts.filter(t => t.slug === slug)
 
-  if (!post) return { notFound: true }
+  if (!posts || posts.length === 0) return { notFound: true }
 
-  const blockMap = await getPostBlocks(post.id)
+  // Fetch block maps for all language versions
+  const blockMaps = {}
+  for (const post of posts) {
+    blockMaps[post.id] = await getPostBlocks(post.id)
+  }
+  
   const emailHash = createHash('md5')
     .update(clientConfig.email)
     .digest('hex')
@@ -92,7 +128,7 @@ export async function getStaticProps ({ params: { slug } }) {
     .toLowerCase()
 
   return {
-    props: { post, blockMap, emailHash },
+    props: { posts, blockMaps, emailHash },
     revalidate: 1
   }
 }
