@@ -1,7 +1,6 @@
 exports.FONTS_SANS = [
+  '"OPPO Sans"',
   '"Geist Mono"',
-  '"Source Han Serif SC"',
-  'ui-monospace',
   'ui-sans-serif',
   'system-ui',
   '-apple-system',
@@ -13,7 +12,7 @@ exports.FONTS_SANS = [
   'sans-serif'
 ]
 exports.FONTS_SERIF = [
-  '"Geist Mono"',
+  '"OPPO Sans"',
   '"Source Han Serif SC"',
   '"Source Han Serif CN"',
   '"Noto Serif CJK SC"',

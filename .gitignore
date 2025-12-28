@@ -38,3 +38,10 @@ yarn-error.log*
 public/robots.txt
 public/sitemap.xml
 .env*.local
+
+# mock data
+lib/mock/
+
+# build artifacts
+nobelium@*
+node
