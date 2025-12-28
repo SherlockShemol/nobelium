@@ -1,6 +1,6 @@
 exports.FONTS_SANS = [
+  'var(--font-oppo-sans)',
   '"OPPO Sans"',
-  '"Geist Mono"',
   'ui-sans-serif',
   'system-ui',
   '-apple-system',
@@ -12,22 +12,12 @@ exports.FONTS_SANS = [
   'sans-serif'
 ]
 exports.FONTS_SERIF = [
+  'var(--font-oppo-sans)',
   '"OPPO Sans"',
-  '"Source Han Serif SC"',
-  '"Source Han Serif CN"',
+  'ui-serif',
+  'Georgia',
   '"Noto Serif CJK SC"',
   '"Songti SC"',
-  '"AR PL New Sung"',
-  '"AR PL SungtiL GB"',
-  'NSimSun',
   'SimSun',
-  '"TW-Sung"',
-  '"WenQuanYi Bitmap Song"',
-  '"AR PL UMing CN"',
-  '"AR PL UMing HK"',
-  '"AR PL UMing TW"',
-  '"AR PL UMing TW MBE"',
-  'PMingLiU',
-  'MingLiU',
   'serif'
 ]

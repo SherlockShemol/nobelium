@@ -35,7 +35,7 @@ export async function getStaticProps (context) {
       page: parseInt(page), // Current Page
       posts
     },
-    revalidate: 1
+    revalidate: 60
   }
 }
 

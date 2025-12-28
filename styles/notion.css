@@ -251,3 +251,17 @@ pre[class*='language-'] {
 .nobelium-toggle-content > :last-child {
   @apply mb-0;
 }
+
+/* Klein Blue Link Hover Effect */
+.notion-link {
+  transition: color 0.2s ease;
+}
+
+.notion-link:hover {
+  color: #002FA7;
+}
+
+/* 深色模式下使用亮色变体以保证可读性 */
+.dark .notion-link:hover {
+  color: #4d7fff;
+}

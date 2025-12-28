@@ -12,6 +12,7 @@ import { prepareDayjs } from '@/lib/dayjs'
 import { ThemeProvider } from '@/lib/theme'
 import Scripts from '@/components/Scripts'
 import blogConfig from '@/blog.config'
+import { oppoSans } from '@/lib/fonts'
 
 // Static imports for default locales to avoid hydration mismatch
 import enUS from '@/assets/i18n/basic/en-US.json'
@@ -64,22 +65,24 @@ export default function MyApp ({ Component, pageProps }) {
   }, [defaultLang])
 
   return (
-    <ConfigProvider value={config}>
-      <Scripts />
-      <LocaleProvider initialLang={currentLang} initialLocale={currentLocale}>
-        <ThemeProvider>
-          <>
-            {process.env.VERCEL_ENV === 'production' && config?.analytics?.provider === 'ackee' && (
-              <Ackee
-                ackeeServerUrl={config.analytics.ackeeConfig.dataAckeeServer}
-                ackeeDomainId={config.analytics.ackeeConfig.domainId}
-              />
-            )}
-            {process.env.VERCEL_ENV === 'production' && config?.analytics?.provider === 'ga' && <Gtag />}
-            <Component {...pageProps} />
-          </>
-        </ThemeProvider>
-      </LocaleProvider>
-    </ConfigProvider>
+    <div className={oppoSans.variable}>
+      <ConfigProvider value={config}>
+        <Scripts />
+        <LocaleProvider initialLang={currentLang} initialLocale={currentLocale}>
+          <ThemeProvider>
+            <>
+              {process.env.VERCEL_ENV === 'production' && config?.analytics?.provider === 'ackee' && (
+                <Ackee
+                  ackeeServerUrl={config.analytics.ackeeConfig.dataAckeeServer}
+                  ackeeDomainId={config.analytics.ackeeConfig.domainId}
+                />
+              )}
+              {process.env.VERCEL_ENV === 'production' && config?.analytics?.provider === 'ga' && <Gtag />}
+              <Component {...pageProps} />
+            </>
+          </ThemeProvider>
+        </LocaleProvider>
+      </ConfigProvider>
+    </div>
   )
 }

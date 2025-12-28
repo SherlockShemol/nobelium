@@ -13,6 +13,10 @@ export default {
         },
         night: {
           DEFAULT: config.darkBackground || '#111827'
+        },
+        klein: {
+          DEFAULT: '#002FA7',
+          light: '#4d7fff' // 深色模式下使用的亮色变体
         }
       },
       fontFamily: {

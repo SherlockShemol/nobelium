@@ -3,7 +3,14 @@ module.exports = {
     esmExternals: 'loose'
   },
   images: {
-    domains: ['gravatar.com']
+    remotePatterns: [
+      { protocol: 'https', hostname: 'gravatar.com' },
+      { protocol: 'https', hostname: '*.amazonaws.com' },
+      { protocol: 'https', hostname: 'www.notion.so' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'prod-files-secure.s3.us-west-2.amazonaws.com' },
+    ],
+    formats: ['image/avif', 'image/webp'],
   },
   eslint: {
     // dirs: ['components', 'layouts', 'lib', 'pages']
@@ -16,6 +23,24 @@ module.exports = {
           {
             key: 'Permissions-Policy',
             value: 'interest-cohort=()'
+          }
+        ]
+      },
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/favicon:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
           }
         ]
       }
