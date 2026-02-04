@@ -83,7 +83,6 @@ const Container = ({ children, layout, fullWidth, ...customMeta }: ContainerProp
       >
         <Header
           navBarTitle={layout === 'blog' ? meta.title : undefined}
-          fullWidth={fullWidth}
         />
         <main className={cn(
           'flex-grow transition-all',

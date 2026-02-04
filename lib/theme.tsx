@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, ReactNode } from 'react'
-import { useMedia } from 'react-use'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { useConfig } from '@/lib/config'
 
 interface ThemeContextValue {
@@ -12,12 +11,30 @@ interface ThemeProviderProps {
   children: ReactNode
 }
 
+/**
+ * Custom hook to detect dark mode preference without SSR hydration mismatch.
+ * Returns `null` during SSR/initial render, then the actual preference on client.
+ */
+function usePrefersDark(): boolean | null {
+  const [prefersDark, setPrefersDark] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    setPrefersDark(mediaQuery.matches)
+
+    const handler = (e: MediaQueryListEvent) => setPrefersDark(e.matches)
+    mediaQuery.addEventListener('change', handler)
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
+
+  return prefersDark
+}
+
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const { appearance } = useConfig()
 
-  // `defaultState` should normally be a boolean. But it causes initial loading flashes in slow
-  // rendering. Setting it to `undefined` so that we can differentiate the initial loading phase
-  const prefersDark = useMedia('(prefers-color-scheme: dark)', undefined)
+  // Use custom hook to avoid react-use SSR warning while still preventing flash
+  const prefersDark = usePrefersDark()
   const dark = appearance === 'dark' || (appearance === 'auto' && prefersDark === true)
 
   useEffect(() => {

@@ -39,10 +39,9 @@ const NavBar = () => {
 
 interface HeaderProps {
   navBarTitle?: string
-  fullWidth?: boolean
 }
 
-export default function Header({ navBarTitle, fullWidth }: HeaderProps) {
+export default function Header({ navBarTitle }: HeaderProps) {
   const BLOG = useConfig()
   const { dark } = useTheme()
 
@@ -95,11 +94,9 @@ export default function Header({ navBarTitle, fullWidth }: HeaderProps) {
 
   return (
     <>
-      <div className="observer-element h-4 md:h-12" ref={sentinelRef}></div>
+      <div className="observer-element h-4" ref={sentinelRef}></div>
       <div
-        className={`sticky-nav group m-auto w-full h-6 flex flex-row justify-between items-center mb-2 md:mb-12 py-8 bg-opacity-60 border-b border-gray-200 dark:border-gray-700 ${
-          !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
-        }`}
+        className="sticky-nav group w-full h-6 flex flex-row justify-between items-center mb-2 py-8 bg-opacity-60 border-b border-gray-200 dark:border-gray-700 px-4 md:px-24"
         id="sticky-nav"
         ref={navRef}
         onClick={handleClickHeader}

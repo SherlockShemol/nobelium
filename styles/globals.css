@@ -50,6 +50,10 @@ body::-webkit-scrollbar-thumb {
   @apply border-b border-opacity-50 border-gray-200 dark:border-gray-600 dark:border-opacity-50 cursor-pointer;
 }
 
+.sticky-nav:not(.sticky-nav-full) {
+  @apply py-6;
+}
+
 .sticky-nav:not(.sticky-nav-full) .caret {
   opacity: 0 !important;
 }
