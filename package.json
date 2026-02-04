@@ -13,7 +13,10 @@
     "url": "http://craigary.net"
   },
   "scripts": {
-    "dev": "next dev",
+    "sync": "node scripts/sync-notion.js",
+    "sync:force": "node scripts/sync-notion.js --force",
+    "dev": "node scripts/sync-notion.js && next dev",
+    "dev:skip-sync": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

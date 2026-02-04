@@ -41,17 +41,16 @@ export default function Header ({ navBarTitle, fullWidth }) {
   const BLOG = useConfig()
   const { dark } = useTheme()
 
-  // Favicon
+  // Favicon - use consistent default for SSR, then update on client
+  const resolveFavicon = (isDark, fallback) => !fallback && isDark ? '/favicon.dark.png' : '/favicon.png'
+  const [favicon, setFavicon] = useState('/favicon.png') // Always start with light favicon for SSR
 
-  const resolveFavicon = fallback => !fallback && dark ? '/favicon.dark.png' : '/favicon.png'
-  const [favicon, _setFavicon] = useState(resolveFavicon())
-  const setFavicon = fallback => _setFavicon(resolveFavicon(fallback))
-
-  useEffect(
-    () => setFavicon(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [dark]
-  )
+  useEffect(() => {
+    // Only update favicon after hydration, when dark is a boolean
+    if (typeof dark === 'boolean') {
+      setFavicon(resolveFavicon(dark, false))
+    }
+  }, [dark])
 
   const useSticky = !BLOG.autoCollapsedNavBar
   const navRef = useRef(/** @type {HTMLDivElement} */ undefined)

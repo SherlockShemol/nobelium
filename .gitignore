@@ -41,6 +41,15 @@ public/sitemap.xml
 
 # mock data (stub file is committed, local dev version can override)
 
+# Notion cache (synced from Notion for local development)
+.cache/
+
 # build artifacts
 nobelium@*
 node
+
+# 
+.cursor
+
+.playwright-mcp
+
