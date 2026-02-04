@@ -37,6 +37,7 @@ yarn-error.log*
 .vercel
 public/robots.txt
 public/sitemap.xml
+public/feed.xml
 .env*.local
 
 # mock data (stub file is committed, local dev version can override)

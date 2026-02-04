@@ -1,15 +1,16 @@
-import { getAllPosts } from '@/lib/notion'
-import { generateRss } from '@/lib/rss'
-export async function getServerSideProps ({ res }) {
-  res.setHeader('Content-Type', 'text/xml')
-  const posts = await getAllPosts({ includePages: false })
-  const latestPosts = posts.slice(0, 10)
-  const xmlFeed = await generateRss(latestPosts)
-  res.write(xmlFeed)
+/**
+ * RSS Feed redirect
+ * 
+ * Redirects to the static feed.xml generated at build time.
+ * This maintains backward compatibility with the /feed URL.
+ */
+
+export async function getServerSideProps({ res }) {
+  res.setHeader('Location', '/feed.xml')
+  res.statusCode = 301
   res.end()
-  return {
-    props: {}
-  }
+  return { props: {} }
 }
+
 const feed = () => null
 export default feed

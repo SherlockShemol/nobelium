@@ -17,7 +17,7 @@
     "sync:force": "node scripts/sync-notion.js --force",
     "dev": "node scripts/sync-notion.js && next dev",
     "dev:skip-sync": "next dev",
-    "build": "next build",
+    "build": "node scripts/sync-notion.js && node scripts/generate-rss.js && next build",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap --config next-sitemap.config.js"
